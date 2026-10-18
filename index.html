@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#03112c">
+  <title>Frost Notification Center · Aura</title>
+  <meta name="description" content="Ice-glass notification cards on a winter night: they fly in, fan out and shatter into frost when you swipe them away.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="css/frost.css">
+  <script type="importmap">{"imports":{"three":"./vendor/three/build/three.module.js"}}</script>
+  <link rel="modulepreload" href="vendor/three/build/three.core.js">
+  <link rel="modulepreload" href="vendor/three/build/three.module.js">
+</head>
+<body>
+  <div class="page">
+    <canvas class="gl gl-back" aria-hidden="true"></canvas>
+
+    <header class="masthead">
+      <p class="eyebrow">Aura</p>
+      <h1>Frost <span class="nb">Notification Center</span></h1>
+    </header>
+
+    <!-- THE COMPONENT: a notification center. Newest first; each notification is an article in the list.
+         Pointer, tap or Tab opens the stack into a fan; ↑/↓ move between notifications, Enter opens one, Delete dismisses,
+         Esc closes. Swipe a card sideways to dismiss it. -->
+    <section class="region" data-region aria-label="Notifications" tabindex="-1">
+      <div class="stage" data-stage>
+        <div class="empty" data-empty hidden>
+          <svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M24 6v36M8.4 15l31.2 18M8.4 33l31.2-18"/><path d="m19 9.5 5 4 5-4M19 38.5l5-4 5 4M9 21.3l6.2-.6-1.6-6M39 26.7l-6.2.6 1.6 6M9 26.7l6.2.6-1.6 6M39 21.3l-6.2-.6 1.6-6"/></g></svg>
+          <p class="empty-t">All caught up</p>
+          <p class="empty-s">New notifications will land here.</p>
+          <button class="pill" type="button" data-restore>Bring them back</button>
+        </div>
+      </div>
+      <ol class="stack" data-list></ol>
+      <div class="bar">
+        <p class="count" data-count></p>
+        <button class="pill clear" type="button" data-clear>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"/></svg>Clear all
+        </button>
+      </div>
+      <noscript><p class="count">Turn on JavaScript to see the notifications.</p></noscript>
+    </section>
+
+    <section class="tiles" aria-label="Replay a state on the stack">
+      <button class="tile" type="button" data-demo="arrive"><img class="shot" src="assets/tiles/arrive.webp" alt="" width="600" height="292" decoding="async"><span class="cap">New notification arrives</span></button>
+      <button class="tile" type="button" data-demo="fan" aria-pressed="false"><img class="shot" src="assets/tiles/fan.webp" alt="" width="600" height="292" decoding="async"><span class="cap">Stack fan out</span></button>
+      <button class="tile" type="button" data-demo="shatter"><img class="shot" src="assets/tiles/shatter.webp" alt="" width="600" height="292" decoding="async"><span class="cap">Soft shatter dismissal</span></button>
+    </section>
+
+    <canvas class="gl gl-fx" aria-hidden="true"></canvas>
+  </div>
+  <p class="sr-only" aria-live="polite" data-announce></p>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
